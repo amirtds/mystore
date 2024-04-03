@@ -1,0 +1,25 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+  <div class="checkout-container">
+    <div class="product-info">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+      <h2>{{ product.name }}</h2>
+      <p class="product-description">{{ product.description }}</p>
+      <p class="product-price">Price: ${{ product.price }}</p>
+    </div>
+
+    <div class="checkout-form">
+      <h2>Checkout</h2>
+      <form action="{% url 'process_purchase' slug=product.slug %}" method="post" class="purchase-form">
+          {% csrf_token %}
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="text" name="card_number" placeholder="Card Number" required>
+          <input type="text" name="card_name" placeholder="Name on Card" required>
+          <input type="text" name="ccv" placeholder="CCV" required>
+          <button type="submit" class="btn-complete">Complete Purchase</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

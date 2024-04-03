@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Django Store</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
+        .container { width: 80%; margin: auto; overflow: hidden; }
+        header { background: #333; color: #fff; padding-top: 30px; min-height: 70px; border-bottom: #0779e4 3px solid; }
+        header a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 16px; }
+        .content { padding: 20px; }
+        .footer { background: #333; color: #fff; text-align: center; padding: 10px; margin-top: 20px; }
+        .card { float: left; width: 30%; margin: 10px; background: #f4f4f4; padding: 10px; box-shadow: 0 0 10px #ccc; }
+        .card img { max-width: 100%; }
+        .clear { clear: both; }
+
+        .products {
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px; /* This adds space between the cards */
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* This will align items properly inside the card */
+            border: 1px solid #ddd;
+            margin-bottom: 20px; /* Adjust margin as needed */
+            padding: 15px;
+            width: calc(33.333% - 20px);
+            box-sizing: border-box;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 450px; /* Set a fixed height or min-height as needed */
+        }
+
+        .card img {
+            width: auto; /* Adjust width or max-width as needed */
+            height: 200px; /* Fixed height for all images */
+            object-fit: contain; /* Use 'contain' to make sure the image fits nicely within the dimensions */
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .card-price {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .card-actions {
+            width: 100%;
+            margin-top: auto; /* Pushes the actions to the bottom of the card */
+        }
+
+        .btn {
+            background-color: #0046e3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 4px; /* Optional: adds rounded corners */
+        }
+
+        /* Add some responsiveness */
+        @media (max-width: 1024px) {
+            .card {
+                width: calc(50% - 20px); /* On smaller screens, we show 2 cards per row */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: calc(100% - 20px); /* On mobile screens, we show 1 card per row */
+            }
+        }
+
+        .detail-btn {
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            border: 2px solid #0046e3; /* Solid border with the theme color */
+            color: #0046e3; /* Text color same as border */
+            background-color: transparent; /* No background for a 'ghost' button style */
+            margin-bottom: 10px; /* Spacing below the button */
+            border-radius: 4px; /* Rounded corners for aesthetics */
+            transition: background-color 0.3s, color 0.3s; /* Transition for when hovering */
+        }
+
+        .detail-btn:hover {
+            background-color: #0046e3; /* Background color on hover */
+            color: white; /* Text color on hover */
+            text-decoration: none; /* Ensures no underline appears on hover */
+        }
+        .checkout-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .product-info {
+            margin-right: 20px;
+        }
+
+        .product-image {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .checkout-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .purchase-form {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        .purchase-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-complete {
+            background-color: #0046e3;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-complete:hover {
+            background-color: #0036c1;
+        }
+
+        /* Add responsiveness to the checkout container */
+        @media (max-width: 768px) {
+        .checkout-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-info {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/"><h1>My Django Store</h1></a>
+        </div>
+    </header>
+
+    <div class="content container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            © 2024 My Django Store
+        </div>
+    </div>
+</body>
+</html>
