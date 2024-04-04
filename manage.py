@@ -3,10 +3,17 @@
 import os
 import sys
 
+# import appsignal
+from __appsignal__ import appsignal
+
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mystore.settings")
+
+    # Start Appsignal
+    appsignal.start()
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
