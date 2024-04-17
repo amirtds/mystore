@@ -3,6 +3,6 @@ pillow==10.3.0
 gunicorn==21.2.0
 uvicorn==0.29.0
 whitenoise==6.6.0
-appsignal==1.2.0
+appsignal==1.2.1
 opentelemetry-instrumentation-django==0.45b0
 python-dotenv==1.0.1
